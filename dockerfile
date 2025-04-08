@@ -4,15 +4,18 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy project files into the container
+# Copy all project files into the container
 COPY . /app
 
-# Upgrade pip (and optionally install any dependencies if you have them)
+# Upgrade pip
 RUN pip install --upgrade pip
+
+# Install dependencies from requirements.txt if available
+# Uncomment the next line if you have a requirements.txt file.
 # RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port the application listens on (adjust if necessary)
+# Expose the port the application will run on
 EXPOSE 8000
 
-# Run the application (update to the correct file)
-CMD ["python", "MatrimoSys.py"]
+# Command to run the application
+CMD ["python", "app.py"]
