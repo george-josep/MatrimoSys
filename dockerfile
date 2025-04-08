@@ -4,16 +4,15 @@ FROM python:3.9-slim
 # Set the working directory in the container
 WORKDIR /app
 
-# Copy the project files into the container
+# Copy project files into the container
 COPY . /app
 
-# Upgrade pip (optional) and install any needed packages manually
+# Upgrade pip (and optionally install any dependencies if you have them)
 RUN pip install --upgrade pip
-# For example, if you need to install Flask manually, uncomment the following line:
-# RUN pip install --no-cache-dir Flask==2.2.2
+# RUN pip install --no-cache-dir -r requirements.txt
 
-# Expose the port your application will run on
+# Expose the port the application listens on (adjust if necessary)
 EXPOSE 8000
 
-# Define the command to run your application
-CMD ["python", "app.py"]
+# Run the application (update to the correct file)
+CMD ["python", "MatrimoSys.py"]
