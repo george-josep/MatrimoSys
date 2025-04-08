@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register - MatrimoSys</title>
+    <style> 
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pacifico ', cursive;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        .top {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top .slider {
+            display: flex;
+            width: 700%; /* 7 slides */
+            animation: slide-animation 21s infinite;
+        }
+
+        .top .slide {
+            min-width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .top .slide:nth-child(1) { background-image: url('2.png'); }
+        .top .slide:nth-child(2) { background-image: url('3.png'); }
+        .top .slide:nth-child(3) { background-image: url('4.png'); }
+        .top .slide:nth-child(4) { background-image: url('5.png'); }
+        .top .slide:nth-child(5) { background-image: url('6.png'); }
+        .top .slide:nth-child(6) { background-image: url('7.png'); }
+        .top .slide:nth-child(7) { background-image: url('8.png'); }
+
+        @keyframes slide-animation {
+            0% { transform: translateX(0); }
+            14.285% { transform: translateX(-100%); }
+            28.57% { transform: translateX(-200%); }
+            42.855% { transform: translateX(-300%); }
+            57.14% { transform: translateX(-400%); }
+            71.425% { transform: translateX(-500%); }
+            85.71% { transform: translateX(-600%); }
+            100% { transform: translateX(0); }
+        }
+
+        .header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: clamp(24px, 4vw, 36px);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f3c634;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: clamp(16px, 3vw, 18px);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .form-container {
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.5);
+            padding: 1rem;
+            max-width: 350px;
+            margin: 2rem auto;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 15;
+        }
+
+        .form-container h2 {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            text-align: center;
+            color: #FFD700;
+        }
+
+        .form-container input {
+            width: 100%;
+            padding: 0.8rem;
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            transition: border 0.3s ease;
+        }
+
+        .form-container input:focus {
+            border-color: #FFD700;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            background-color: #FFD700;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #f3c634;
+        }
+
+        .form-container a {
+            text-align: center;
+            display: block;
+            font-size: 1.2rem;
+            color: #333;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .form-container a:hover {
+            color: #FFD700;
+        }
+    </style>
+
+    <script>
+        async function validateUserId() {
+            const userid = document.getElementById("userid").value;
+            const useridPattern = /^[a-z0-9]{4,}$/;  // Only lowercase letters and numbers, minimum 4 characters
+            
+            if (!userid || !useridPattern.test(userid)) {
+                alert("User ID must be at least 4 characters long and can only contain lowercase letters and numbers (no spaces).");
+                return false;
+            }
+            return true;
+        }
+
+        function validateUsername() {
+            const username = document.getElementById("username").value;
+            if (!username || username.length < 3) {
+                alert("Username must be at least 3 characters long.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateEmail() {
+            const email = document.getElementById("email").value;
+            const emailPattern = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,6}$/;
+            if (!email || !emailPattern.test(email)) {
+                alert("Please enter a valid email address.");
+                return false;
+            }
+            return true;
+        }
+
+        function validatePassword() {
+            const password = document.getElementById("password").value;
+            if (!password || password.length < 8) {
+                alert("Password must be at least 8 characters long.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateConfirmPassword() {
+            const password = document.getElementById("password").value;
+            const confirmPassword = document.getElementById("confirm_password").value;
+            if (password !== confirmPassword) {
+                alert("Passwords do not match. Please try again.");
+                return false;
+            }
+            return true;
+        }
+
+        function validateDOB() {
+            const dob = document.getElementById("dob").value;
+            if (!dob) {
+                alert("Date of Birth is required.");
+                return false;
+            }
+            
+            const dobDate = new Date(dob);
+            const today = new Date();
+            const age = today.getFullYear() - dobDate.getFullYear();
+            const monthDifference = today.getMonth() - dobDate.getMonth();
+
+            if (monthDifference < 0 || (monthDifference === 0 && today.getDate() < dobDate.getDate())) {
+                age--;
+            }
+
+            if (age < 18) {
+                alert("You must be at least 18 years old to register.");
+                return false;
+            }
+            return true;
+        }
+
+        function validatePhone() {
+            const phone = document.getElementById("phone").value;
+            const phonePattern = /^\+?[\d\s-]{10,}$/;  // Allows +, digits, spaces, and hyphens, minimum 10 digits
+            
+            if (!phone || !phonePattern.test(phone)) {
+                alert("Please enter a valid phone number (minimum 10 digits).");
+                return false;
+            }
+            return true;
+        }
+
+        function validateForm(event) {
+            return (
+                validateUserId() &&
+                validateUsername() &&
+                validateEmail() &&
+                validatePassword() &&
+                validateConfirmPassword() &&
+                validateDOB() &&
+                validatePhone()
+            );
+        }
+
+        document.addEventListener("DOMContentLoaded", () => {
+            document.getElementById("userid").onchange = validateUserId;
+            document.getElementById("username").onchange = validateUsername;
+            document.getElementById("email").onchange = validateEmail;
+            document.getElementById("password").onchange = validatePassword;
+            document.getElementById("confirm_password").onchange = validateConfirmPassword;
+            document.getElementById("dob").addEventListener("input", validateDOB);
+            document.getElementById("phone").onchange = validatePhone;
+        });
+    </script>
+
+</head>
+<body>
+    <div class="top">
+        <div class="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">MatrimoSys</div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="form-container">
+        <h2>Create Your Account</h2>
+        <form id="registrationForm" action="register_user.php" method="POST" enctype="multipart/form-data">
+            <input type="text" id="userid" name="userid" placeholder="User ID" required>
+            <input type="text" id="username" name="username" placeholder="Username" required>
+            <input type="email" id="email" name="email" placeholder="Email" required>
+            <input type="tel" id="phone" name="phone" placeholder="Phone Number" required>
+            <label for="dob" style="display: block; margin-bottom: 0.5rem; color: #666;">Date of Birth</label>
+            <input type="date" id="dob" name="dob" required>
+            <input type="password" id="password" name="password" placeholder="Password" required>
+            <input type="password" id="confirm_password" name="confirm_password" placeholder="Confirm Password" required>
+            <input type="hidden" name="action" value="send_otp">
+            <button type="submit">Get OTP</button>
+        </form>
+
+        <form id="otpForm" action="register_user.php" method="POST" style="display: none;">
+            <input type="text" id="otp" name="otp" placeholder="Enter OTP" required>
+            <input type="hidden" name="action" value="verify_otp">
+            <input type="hidden" id="temp_userid" name="temp_userid">
+            <input type="hidden" id="temp_username" name="temp_username">
+            <input type="hidden" id="temp_email" name="temp_email">
+            <input type="hidden" id="temp_phone" name="temp_phone">
+            <input type="hidden" id="temp_dob" name="temp_dob">
+            <input type="hidden" id="temp_password" name="temp_password">
+            <button type="submit">Verify & Register</button>
+        </form>
+        <a href="login.html">Already have an account?</a>
+    </div>
+
+    <script>
+    document.getElementById('registrationForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        if (validateForm(e)) {
+            const formData = new FormData(this);
+            formData.append('action', 'send_otp');
+            
+            fetch('register_user.php', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.status === 'success') {
+                    // Store form data in hidden fields
+                    document.getElementById('temp_userid').value = document.getElementById('userid').value;
+                    document.getElementById('temp_username').value = document.getElementById('username').value;
+                    document.getElementById('temp_email').value = document.getElementById('email').value;
+                    document.getElementById('temp_phone').value = document.getElementById('phone').value;
+                    document.getElementById('temp_dob').value = document.getElementById('dob').value;
+                    document.getElementById('temp_password').value = document.getElementById('password').value;
+                    
+                    // Show OTP form and hide registration form
+                    document.getElementById('registrationForm').style.display = 'none';
+                    document.getElementById('otpForm').style.display = 'block';
+                    alert('OTP has been sent to your email address');
+                } else {
+                    alert(data.message);
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert('An error occurred. Please try again.');
+            });
+        }
+    });
+
+    // Add event listener for OTP form
+    document.getElementById('otpForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        const formData = new FormData(this);
+        formData.append('action', 'verify_otp');
+        
+        fetch('register_user.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'success') {
+                alert(data.message);
+                if (data.redirect) {
+                    window.location.href = data.redirect;
+                }
+            } else {
+                alert(data.message);
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            alert('An error occurred. Please try again.');
+        });
+    });
+    </script>
+</body>
+</html>

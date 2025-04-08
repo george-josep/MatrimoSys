@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Logout - MatrimoSys</title>
+    <style>
+        /* ... existing code ... */
+        /* Reusing the same styles from login.html */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pacifico', cursive;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        .top {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* ... existing slider styles ... */
+
+        .form-container {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            max-width: 400px;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 15;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #333;
+        }
+
+        .form-container p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            color: #333;
+        }
+
+        .form-container button {
+            width: 100%;
+            padding: 1rem;
+            font-size: 1.5rem;
+            background-color: #FFD700;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+
+        .form-container button:hover {
+            background-color: #f3c634;
+        }
+    </style>
+
+    <script>
+        function logout() {
+            // Clear all session storage
+            sessionStorage.clear();
+            localStorage.clear();
+
+            // Make a request to server to destroy PHP session
+            fetch('logout.php', {
+                method: 'POST',
+                credentials: 'include' // Include cookies in the request
+            })
+            .then(() => {
+                // Redirect to login page after server-side session is destroyed
+                window.location.href = "login.html";
+            })
+            .catch(error => {
+                console.error('Logout error:', error);
+                // Redirect anyway
+                window.location.href = "login.html";
+            });
+        }
+
+        // Auto logout after 3 seconds
+        window.onload = function() {
+            setTimeout(logout, 3000);
+        }
+    </script>
+</head>
+<body>
+    <div class="top">
+        <div class="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+    </div>
+
+    <div class="form-container">
+        <h2>Logging Out</h2>
+        <p>You are being logged out. Please wait...</p>
+        <button onclick="logout()">Logout Now</button>
+    </div>
+</body>
+</html> 

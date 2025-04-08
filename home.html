@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MatrimoSys - Find Your Perfect Match</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #FFD700;
+            --primary-light: #FFE55C;
+            --primary-dark: #E6C200;
+            --white: #FFFFFF;
+            --light-gray: #F8F9FA;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            color: #333;
+            background-color: var(--white);
+        }
+
+        header {
+            background: var(--white);
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 50px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        nav a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 20px;
+            border-radius: 25px;
+            transition: all 0.3s ease;
+            margin-left: 15px;
+        }
+
+        nav a:hover {
+            background: var(--primary-color);
+            color: var(--white);
+            transform: translateY(-2px);
+        }
+
+        .hero {
+            height: 100vh;
+            background: linear-gradient(rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.9)), 
+                        url('https://source.unsplash.com/1920x1080/?wedding,couple') no-repeat center center/cover;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding: 0 20px;
+        }
+
+        .hero-content {
+            max-width: 800px;
+            animation: fadeIn 1s ease-out;
+        }
+
+        .hero h1 {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .cta-button {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 15px 40px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            background: var(--primary-dark);
+            box-shadow: 0 6px 20px rgba(255, 215, 0, 0.4);
+        }
+
+        .statistics {
+            background: var(--primary-color);
+            padding: 50px;
+            color: var(--white);
+            text-align: center;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .stat-number {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .features {
+            padding: 100px 50px;
+            background: var(--white);
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .feature {
+            background: var(--white);
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+            border: 2px solid var(--primary-color);
+        }
+
+        .feature:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .feature i {
+            font-size: 3rem;
+            color: var(--primary-color);
+            margin-bottom: 20px;
+        }
+
+        .success-stories {
+            background: var(--light-gray);
+            padding: 100px 50px;
+        }
+
+        .story-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 30px auto 0;
+        }
+
+        .story-card {
+            background: var(--white);
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .story-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(255, 215, 0, 0.2);
+        }
+
+        .story-image {
+            height: 200px;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .story-content {
+            padding: 20px;
+            text-align: center;
+        }
+
+        .testimonials {
+            padding: 100px 50px;
+            background: var(--white);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            color: var(--primary-color);
+            margin-bottom: 50px;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .testimonial {
+            background: var(--light-gray);
+            padding: 30px;
+            border-radius: 20px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(255, 215, 0, 0.1);
+        }
+
+        .testimonial img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            margin-bottom: 20px;
+            border: 3px solid var(--primary-color);
+        }
+
+        footer {
+            background: var(--primary-color);
+            color: var(--white);
+            padding: 30px;
+            text-align: center;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 3rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            header {
+                padding: 15px 20px;
+            }
+
+            nav a {
+                padding: 8px 15px;
+                margin-left: 5px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="logo">MatrimoSys</div>
+        <nav>
+            <a href="register.html">Register</a>
+            <a href="login.html">Log In</a>
+            <a href="about.html">About</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="hero">
+        <div class="hero-content">
+            <h1>Find Your Perfect Match</h1>
+            <p>Begin your journey to forever with MatrimoSys</p>
+            <a href="register.html" class="cta-button">
+                Start Your Journey <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+    </div>
+
+    <div class="statistics">
+        <div class="stats-grid">
+            <div class="stat-item">
+                <div class="stat-number">10K+</div>
+                <div>Happy Couples</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">50K+</div>
+                <div>Active Members</div>
+            </div>
+            <div class="stat-item">
+                <div class="stat-number">95%</div>
+                <div>Success Rate</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="features">
+        <div class="feature">
+            <i class="fas fa-user-shield"></i>
+            <h3>Verified Profiles</h3>
+            <p>Every profile is thoroughly verified for your safety and trust.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-heart"></i>
+            <h3>Smart Matching</h3>
+            <p>Our intelligent algorithm finds your perfect match.</p>
+        </div>
+        <div class="feature">
+            <i class="fas fa-lock"></i>
+            <h3>Privacy First</h3>
+            <p>Your privacy and security are our top priority.</p>
+        </div>
+    </div>
+
+    <div class="success-stories">
+        <h2 class="section-title">Success Stories</h2>
+        <div class="story-grid">
+            <div class="story-card">
+                <div class="story-image" style="background-image: url('https://source.unsplash.com/400x300/?wedding')"></div>
+                <div class="story-content">
+                    <h3>Rahul & Priya</h3>
+                    <p>"Found each other on MatrimoSys and got married within 6 months!"</p>
+                </div>
+            </div>
+            <div class="story-card">
+                <div class="story-image" style="background-image: url('https://source.unsplash.com/400x300/?couple')"></div>
+                <div class="story-content">
+                    <h3>Arun & Meera</h3>
+                    <p>"Thanks to MatrimoSys for helping us find our perfect match!"</p>
+                </div>
+            </div>
+            <div class="story-card">
+                <div class="story-image" style="background-image: url('https://source.unsplash.com/400x300/?marriage')"></div>
+                <div class="story-content">
+                    <h3>John & Sarah</h3>
+                    <p>"Our story began here, and we couldn't be happier!"</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="testimonials">
+        <h2 class="section-title">What Our Members Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <img src="https://source.unsplash.com/100x100/?person" alt="User">
+                <p>"MatrimoSys made finding my soulmate so easy and comfortable. The verification process gave me confidence in my search."</p>
+                <h4>- Anjali S.</h4>
+            </div>
+            <div class="testimonial">
+                <img src="https://source.unsplash.com/100x100/?man" alt="User">
+                <p>"The perfect platform for serious relationship seekers. I found my perfect match within months!"</p>
+                <h4>- Vikram R.</h4>
+            </div>
+            <div class="testimonial">
+                <img src="https://source.unsplash.com/100x100/?woman" alt="User">
+                <p>"Excellent customer support and a user-friendly interface made my journey to finding love smooth."</p>
+                <h4>- Maya P.</h4>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2025 MatrimoSys. All rights reserved.</p>
+    </footer>
+</body>
+</html>

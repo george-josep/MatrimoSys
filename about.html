@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us - MatrimoSys</title>
+    <style>
+       
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Pacifico', cursive;
+            overflow-x: hidden;
+            color: #333;
+        }
+
+        .top {
+            min-height: 100vh;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .top .slider {
+            display: flex;
+            width: 700%; /* 7 slides */
+            animation: slide-animation 21s infinite;
+        }
+
+        .top .slide {
+            min-width: 100%;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+        }
+
+        /* Assign images to slides */
+        .top .slide:nth-child(1) { background-image: url('2.png'); }
+        .top .slide:nth-child(2) { background-image: url('3.png'); }
+        .top .slide:nth-child(3) { background-image: url('4.png'); }
+        .top .slide:nth-child(4) { background-image: url('5.png'); }
+        .top .slide:nth-child(5) { background-image: url('6.png'); }
+        .top .slide:nth-child(6) { background-image: url('7.png'); }
+        .top .slide:nth-child(7) { background-image: url('8.png'); }
+
+        @keyframes slide-animation {
+            0% { transform: translateX(0); }
+            14.285% { transform: translateX(-100%); }
+            28.57% { transform: translateX(-200%); }
+            42.855% { transform: translateX(-300%); }
+            57.14% { transform: translateX(-400%); }
+            71.425% { transform: translateX(-500%); }
+            85.71% { transform: translateX(-600%); }
+            100% { transform: translateX(0); }
+        }
+
+        .header {
+            padding: 20px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: rgba(0, 0, 0, 0.5);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 10;
+            backdrop-filter: blur(10px);
+        }
+
+        .logo {
+            font-size: clamp(24px, 4vw, 36px);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: #f3c634;
+            text-shadow: 0px 0px 10px rgba(255, 255, 255, 0.5);
+        }
+
+        .nav {
+            display: flex;
+            align-items: center;
+        }
+
+        .nav a {
+            color: rgb(255, 255, 255);
+            text-decoration: none;
+            margin-left: 20px;
+            font-weight: 600;
+            font-size: clamp(16px, 3vw, 18px);
+            transition: color 0.3s ease, text-shadow 0.3s ease;
+        }
+
+        .nav a:hover {
+            color: #FFD700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.8);
+        }
+
+        .content-container {
+            position: absolute;
+            top: 5%;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.8);
+            padding: 3rem;
+            max-width: 600px;
+            margin: 5rem auto;
+            border-radius: 10px;
+            box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.3);
+            z-index: 15;
+        }
+
+        .content-container h2 {
+            font-size: 2.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            color: #333;
+        }
+
+        .content-container p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+            color: #333;
+            margin-bottom: 1.5rem;
+        }
+
+        .content-container a {
+            text-align: center;
+            display: block;
+            font-size: 1.2rem;
+            color: #333;
+            text-decoration: none;
+            margin-top: 1rem;
+        }
+
+        .content-container a:hover {
+            color: #FFD700;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="top">
+        <div class="slider">
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+            <div class="slide"></div>
+        </div>
+    </div>
+
+    <header class="header">
+        <div class="logo">MatrimoSys</div>
+        <nav class="nav">
+            <a href="home.html">Home</a>
+            <a href="register.html">Register</a>
+            <a href="login.html">Log In</a>
+            <a href="contact.html">Contact</a>
+        </nav>
+    </header>
+
+    <div class="content-container">
+        <h2>About MatrimoSys</h2>
+        <p>MatrimoSys is a platform designed to help individuals find their ideal life partner in a safe and user-friendly environment. Our mission is to provide a seamless, personalized experience for people seeking meaningful relationships.</p>
+        <p>We focus on offering various tools, resources, and support to ensure that our members make the best connections. With a modern approach and a commitment to security, MatrimoSys is the perfect place for people looking for love.</p>
+        <p>Join us today and start your journey to finding a meaningful relationship with MatrimoSys!</p>
+        <a href="home.html">Back to Home</a>
+    </div>
+</body>
+</html>
