@@ -1,14 +1,18 @@
 <?php
-$servername = "localhost"; // Usually localhost if using a local server
-$username = "root";        // MySQL username (default is root)
-$password = "";            // MySQL password (default is empty)
-$dbname = "matrimosys";    // Database name
+$host = "dpg-cvqc991r0fns73emthf0-a.oregon-postgres.render.com";
+$port = "5432";
+$dbname = "matrimosys";
+$user = "matrimosys_user";
+$password = "aLjlKc2xo0XQzbkZQYalgU8z7I4XOTPo";
 
-// Create connection
-$conn = new mysqli($servername, $username, $password, $dbname);
+// Create connection string
+$conn_string = "host=$host port=$port dbname=$dbname user=$user password=$password";
+
+// Establish connection
+$conn = pg_connect($conn_string);
 
 // Check connection
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
+if (!$conn) {
+    die("Connection failed: " . pg_last_error());
 }
 ?>
