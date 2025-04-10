@@ -1,6 +1,7 @@
 <?php
 session_start();
-
+error_reporting(E_ALL);
+ini_set('display_errors', 1);
 // Get the submitted userid and password
 $userid = $_POST['userid'] ?? '';
 $password = $_POST['password'] ?? '';
