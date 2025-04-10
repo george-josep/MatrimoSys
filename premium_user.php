@@ -137,19 +137,31 @@ if ($user_preferences) {
     // Debug: Log parameters
     error_log("Recommended Parameters: " . print_r($params, true));
     
-    // Bind parameters if any exist
-    if (!empty($params)) {
-        $bind_params = array_merge([$types], $params);
-        call_user_func_array([$recommended_stmt, 'bind_param'], makeValuesReferenced($bind_params));
-    }
+    // Add this before preparing the statement
+    error_log("Generated SQL Query: " . $recommended_sql);
+    error_log("Parameters: " . print_r($params, true));
+    error_log("Types string: " . $types);
     
-    // Execute query
-    $recommended_stmt->execute();
-    $recommended_result = $recommended_stmt->get_result();
-    
-    // Fetch results
-    while ($row = $recommended_result->fetch_assoc()) {
-        $recommended_matches[] = $row;
+    // Before the bind_param, add error checking for the prepare statement
+    if ($recommended_stmt === false) {
+        // Log the error and handle it gracefully
+        error_log("Prepare failed: " . $conn->error);
+        $recommended_matches = []; // Set empty array as fallback
+    } else {
+        // Only proceed with bind_param if prepare was successful
+        if (!empty($params)) {
+            $bind_params = array_merge([$types], $params);
+            call_user_func_array([$recommended_stmt, 'bind_param'], makeValuesReferenced($bind_params));
+        }
+
+        // Execute query
+        $recommended_stmt->execute();
+        $recommended_result = $recommended_stmt->get_result();
+        
+        // Fetch results
+        while ($row = $recommended_result->fetch_assoc()) {
+            $recommended_matches[] = $row;
+        }
     }
     
     // Debug: Log the number of recommendations
